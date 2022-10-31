@@ -1,0 +1,125 @@
+@use "sass:color";
+@use "sass:string";
+@use "sass:map";
+
+$themes: (
+	"light": (
+		"primary": #366b02,
+		"on-primary": #ffffff,
+		"primary-container": #b6f482,
+		"on-primary-container": #0c2000,
+		"secondary": #56624b,
+		"on-secondary": #ffffff,
+		"secondary-container": #dae7c9,
+		"on-secondary-container": #141e0c,
+		"tertiary": #386665,
+		"on-tertiary": #ffffff,
+		"tertiary-container": #bbecea,
+		"on-tertiary-container": #00201f,
+		"error": #ba1a1a,
+		"on-error": #ffffff,
+		"error-container": #ffdad6,
+		"on-error-container": #410002,
+		"background": #fdfdf5,
+		"on-background": #1a1c18,
+		"surface": #fdfdf5,
+		"on-surface": #1a1c18,
+		"surface-variant": #e0e4d6,
+		"on-surface-variant": #44483e,
+		"outline": #74796d,
+		"outline-variant": #c4c8ba,
+		"shadow": #000000,
+		"scrim": #000000,
+		"inverse-surface": #2f312c,
+		"inverse-on-surface": #f1f1ea,
+		"inverse-primary": #9bd769,
+	),
+	"dark": (
+		"primary": #9bd769,
+		"on-primary": #193800,
+		"primary-container": #275000,
+		"on-primary-container": #b6f482,
+		"secondary": #becbae,
+		"on-secondary": #29341f,
+		"secondary-container": #3f4a34,
+		"on-secondary-container": #dae7c9,
+		"tertiary": #a0cfcd,
+		"on-tertiary": #003736,
+		"tertiary-container": #1e4e4d,
+		"on-tertiary-container": #bbecea,
+		"error": #ffb4ab,
+		"on-error": #690005,
+		"error-container": #93000a,
+		"on-error-container": #ffb4ab,
+		"background": #1a1c18,
+		"on-background": #e3e3dc,
+		"surface": #1a1c18,
+		"on-surface": #e3dce3,
+		"surface-variant": #44483e,
+		"on-surface-variant": #c4c8ba,
+		"outline": #8e9286,
+		"outline-variant": #44483e,
+		"shadow": #000000,
+		"scrim": #000000,
+		"inverse-surface": #e3e3dc,
+		"inverse-on-surface": #2f312c,
+		"inverse-primary": #366b02,
+	),
+) !default;
+
+@function overlay($overlay, $color) {
+	@return linear-gradient(0deg, $overlay, $overlay), $color;
+}
+
+$shadows: (
+	"light": (
+		1: "0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)",
+		2: "0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)",
+		3: "0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3)",
+		4: "0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3)",
+		5: "0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3)",
+	),
+	"dark": (
+		1: "0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3)",
+		2: "0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3)",
+		3: "0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3)",
+		4: "0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3)",
+		5: "0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3)",
+	),
+);
+
+@mixin themeify {
+	@each $theme, $map in $themes {
+		.theme-#{$theme} & {
+			$theme-map: () !global;
+			@each $key, $submap in $map {
+				$value: map.get(map.get($themes, $theme), "#{$key}");
+				$theme-map: map.merge(
+					$theme-map,
+					(
+						$key: $value,
+					)
+				) !global;
+			}
+
+			$themed-shadows: map.get($shadows, $theme);
+
+			@each $key, $submap in $themed-shadows {
+				$value: map.get($themed-shadows, $key);
+				$theme-map: map.merge(
+					$theme-map,
+					(
+						"shadow-#{$key}": string.unquote($value),
+					)
+				) !global;
+			}
+
+			@content;
+			$theme-map: null !global;
+		}
+	}
+}
+
+@function themed($key) {
+	@return map.get($theme-map, $key);
+}

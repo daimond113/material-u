@@ -1,0 +1,36 @@
+{
+  "name": "@material-u/css",
+  "version": "0.0.0",
+  "description": "A package containing the CSS for Google's Material You components.",
+  "scripts": {
+    "lint": "stylelint '**/*.scss'",
+    "build": "sass src:dist",
+    "build:watch": "sass --watch src:dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daimond113/material-u.git",
+    "directory": "packages/css"
+  },
+  "keywords": [
+    "material",
+    "css"
+  ],
+  "author": {
+    "name": "daimond113",
+    "email": "contact@daimond113.com",
+    "url": "https://www.daimond113.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daimond113/material-u/issues"
+  },
+  "homepage": "https://github.com/daimond113/material-u#readme",
+  "devDependencies": {
+    "stylelint": "^14.14.0"
+  },
+  "dependencies": {
+    "sass": "^1.55.0",
+    "stylelint-config-recommended-scss": "^8.0.0"
+  }
+}

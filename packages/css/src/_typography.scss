@@ -1,0 +1,118 @@
+@use "./utils.scss";
+
+$font-plain: "Roboto Flex", sans-serif !default;
+
+$font-brand: "Roboto Flex", sans-serif !default;
+
+@mixin md-sys-typescale-display-large {
+	font-family: $font-brand;
+	line-height: utils.rem(64px);
+	font-size: utils.rem(57px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-display-medium {
+	font-family: $font-brand;
+	line-height: utils.rem(52px);
+	font-size: utils.rem(45px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-display-small {
+	font-family: $font-brand;
+	line-height: utils.rem(44px);
+	font-size: utils.rem(36px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-headline-large {
+	font-family: $font-brand;
+	line-height: utils.rem(40px);
+	font-size: utils.rem(32px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-headline-medium {
+	font-family: $font-brand;
+	line-height: utils.rem(36px);
+	font-size: utils.rem(28px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-headline-small {
+	font-family: $font-brand;
+	line-height: utils.rem(32px);
+	font-size: utils.rem(24px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-title-large {
+	font-family: $font-brand;
+	line-height: utils.rem(28px);
+	font-size: utils.rem(22px);
+	font-weight: 400;
+}
+
+@mixin md-sys-typescale-title-medium {
+	font-family: $font-plain;
+	line-height: utils.rem(24px);
+	font-size: utils.rem(16px);
+	font-weight: 500;
+	letter-spacing: utils.rem(0.15px);
+}
+
+@mixin md-sys-typescale-title-small {
+	font-family: $font-plain;
+	line-height: utils.rem(20px);
+	font-size: utils.rem(14px);
+	font-weight: 500;
+	letter-spacing: utils.rem(0.1px);
+}
+
+@mixin md-sys-typescale-label-large {
+	font-family: $font-plain;
+	line-height: utils.rem(20px);
+	font-size: utils.rem(14px);
+	font-weight: 500;
+	letter-spacing: utils.rem(0.1px);
+}
+
+@mixin md-sys-typescale-label-medium {
+	font-family: $font-plain;
+	line-height: utils.rem(16px);
+	font-size: utils.rem(12px);
+	font-weight: 500;
+	letter-spacing: utils.rem(0.5px);
+}
+
+@mixin md-sys-typescale-label-small {
+	font-family: $font-plain;
+	line-height: utils.rem(16px);
+	font-size: utils.rem(11px);
+	font-weight: 500;
+	letter-spacing: utils.rem(0.5px);
+}
+
+@mixin md-sys-typescale-body-large {
+	font-family: $font-plain;
+	line-height: utils.rem(24px);
+	font-size: utils.rem(16px);
+	font-weight: 400;
+	letter-spacing: utils.rem(0.5px);
+}
+
+@mixin md-sys-typescale-body-medium {
+	font-family: $font-plain;
+	line-height: utils.rem(20px);
+	font-size: utils.rem(14px);
+	font-weight: 400;
+	letter-spacing: utils.rem(0.25px);
+}
+
+@mixin md-sys-typescale-body-small {
+	font-family: $font-plain;
+	line-height: utils.rem(16px);
+	font-size: utils.rem(12px);
+	font-weight: 400;
+	letter-spacing: utils.rem(0.4px);
+}
