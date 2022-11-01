@@ -1,0 +1,174 @@
+@use "sass:map";
+@use "./colors";
+@use "./typography";
+@use "./utils";
+@use "./states";
+
+@mixin mtu-fab($variant: "primary", $lowered: false, $icon-size: 24px) {
+	appearance: none;
+	border: none;
+	cursor: pointer;
+
+	@include colors.themeify {
+		$color: colors.themed("on-#{$variant}-container");
+
+		@if ($variant == "surface") {
+			$color: colors.themed("primary");
+		}
+
+		$background: colors.themed("#{$variant}-container");
+
+		@if ($variant == "surface") {
+			$background: colors.themed("surface");
+		}
+
+		background: $background;
+		color: $color;
+
+		@if ($lowered) {
+			box-shadow: colors.themed("shadow-1");
+		} @else {
+			box-shadow: colors.themed("shadow-3");
+		}
+
+		&:hover {
+			@if ($lowered) {
+				box-shadow: colors.themed("shadow-2");
+			} @else {
+				box-shadow: colors.themed("shadow-4");
+			}
+
+			background: colors.overlay(
+				rgba($color, map.get(states.$stateLayerOpacity, "hover")),
+				$background
+			);
+		}
+
+		&:active,
+		&:focus-visible {
+			background: colors.overlay(
+				rgba($color, map.get(states.$stateLayerOpacity, "active")),
+				$background
+			);
+
+			@if ($lowered) {
+				box-shadow: colors.themed("shadow-1");
+			} @else {
+				box-shadow: colors.themed("shadow-3");
+			}
+		}
+	}
+
+	& > .mtu-icon {
+		width: utils.rem($icon-size);
+		height: utils.rem($icon-size);
+		font-size: utils.rem($icon-size);
+
+		@content;
+	}
+}
+
+@each $variant in ("primary", "surface", "secondary", "tertiary") {
+	.mtu-fab-#{$variant} {
+		width: 56px;
+		height: 56px;
+		border-radius: 16px;
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+
+		@include mtu-fab($variant);
+	}
+
+	.mtu-fab-#{$variant}-lowered {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		width: 56px;
+		height: 56px;
+		border-radius: 16px;
+
+		@include mtu-fab($variant, true);
+	}
+
+	.mtu-small-fab-#{$variant} {
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+
+		@include mtu-fab($variant);
+	}
+
+	.mtu-small-fab-#{$variant}-lowered {
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+
+		@include mtu-fab($variant, true);
+	}
+
+	.mtu-large-fab-#{$variant} {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		width: 96px;
+		height: 96px;
+		border-radius: 28px;
+
+		@include mtu-fab($variant, false, 36px);
+	}
+
+	.mtu-large-fab-#{$variant}-lowered {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		width: 96px;
+		height: 96px;
+		border-radius: 28px;
+
+		@include mtu-fab($variant, true, 36px);
+	}
+
+	.mtu-expanded-fab-#{$variant} {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		min-width: 80px;
+		height: 56px;
+		border-radius: 16px;
+		padding: 16px;
+
+		@include mtu-fab($variant) {
+			margin-right: 8px;
+		}
+		@include typography.md-sys-typescale-label-large;
+	}
+
+	.mtu-expanded-fab-#{$variant}-lowered {
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		min-width: 80px;
+		height: 56px;
+		border-radius: 16px;
+		padding: 16px;
+
+		@include mtu-fab($variant, true) {
+			margin-right: 8px;
+		}
+		@include typography.md-sys-typescale-label-large;
+	}
+}
+
+.mtu-small-fab-container {
+	position: fixed;
+	bottom: calc(16px + 56px + 24px);
+	right: 16px;
+	width: 56px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 16px;
+}

@@ -1,18 +1,22 @@
 import React from "react"
 import type { StoryFn, Meta } from "@storybook/react"
 
-import { Button } from "../Button"
+import { Button, ButtonProps } from "../Button"
 
 export default {
-	title: "Example/Button",
+	title: "Common Button",
 	component: Button,
 } as Meta<typeof Button>
 
-const Template: StoryFn<typeof Button> = (args) => (
+type ButtonStory = (
+	props: Parameters<typeof Button>[0] & { withIcon: boolean }
+) => ReturnType<typeof Button>
+
+const Template: StoryFn<ButtonStory> = ({ withIcon, ...args }) => (
 	<Button {...args}>
-		{args.variant !== "text" ? (
+		{withIcon && (
 			<span className="material-symbols-outlined mtu-icon">close</span>
-		) : null}
+		)}
 		{args.children}
 	</Button>
 )
@@ -22,4 +26,5 @@ Primary.args = {
 	children: "Button",
 	variant: "filled",
 	disabled: false,
+	withIcon: false,
 }

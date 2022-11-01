@@ -27,10 +27,8 @@
   },
   "homepage": "https://github.com/daimond113/material-u#readme",
   "devDependencies": {
-    "stylelint": "^14.14.0"
-  },
-  "dependencies": {
     "sass": "^1.55.0",
+    "stylelint": "^14.14.0",
     "stylelint-config-recommended-scss": "^8.0.0"
   }
 }

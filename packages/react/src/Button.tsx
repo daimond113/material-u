@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import React from "react"
 
 type ButtonVariant =
@@ -9,16 +10,18 @@ type ButtonVariant =
 	| "text"
 	| "text-icon"
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	variant: ButtonVariant
 }
 
 export function Button({ variant: v, ...props }: ButtonProps) {
 	const variant =
-		v === "text-icon"
-			? "mtu-text-button-icon"
-			: v === "outlined-background"
+		v === "outlined-background"
 			? "mtu-outlined-button-background"
+			: v === "text-icon"
+			? "mtu-text-button-icon"
 			: `mtu-${v}-button`
-	return <button {...props} className={variant}></button>
+
+	return <button {...props} className={clsx(variant, props.className)}></button>
 }
