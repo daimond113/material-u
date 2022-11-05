@@ -8,23 +8,25 @@ export default {
 	component: Button,
 } as Meta<typeof Button>
 
-type ButtonStory = (
-	props: Parameters<typeof Button>[0] & { withIcon: boolean }
-) => ReturnType<typeof Button>
+export const NoIcon: StoryFn<typeof Button> = (args) => (
+	<Button {...args}>{args.children}</Button>
+)
 
-const Template: StoryFn<ButtonStory> = ({ withIcon, ...args }) => (
+NoIcon.args = {
+	children: "Button",
+	variant: "filled",
+	disabled: false,
+}
+
+export const WithIcon: StoryFn<typeof Button> = (args) => (
 	<Button {...args}>
-		{withIcon && (
-			<span className="material-symbols-outlined mtu-icon">close</span>
-		)}
+		<span className="material-symbols-outlined mtu-icon">close</span>
 		{args.children}
 	</Button>
 )
 
-export const Primary = Template.bind({})
-Primary.args = {
+WithIcon.args = {
 	children: "Button",
 	variant: "filled",
 	disabled: false,
-	withIcon: false,
 }

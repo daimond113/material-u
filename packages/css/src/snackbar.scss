@@ -1,0 +1,41 @@
+@use "./typography.scss";
+@use "./colors.scss";
+@use "./utils.scss";
+
+.mtu-snackbar {
+	padding: 4px 8px 4px 16px;
+	min-height: 40px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+
+	@include colors.themeify {
+		@include typography.md-sys-typescale-body-medium;
+		background: colors.themed("inverse-surface");
+		color: colors.themed("inverse-on-surface");
+		box-shadow: colors.themed("shadow-3");
+
+		& > button {
+			margin-left: auto;
+			color: colors.themed("inverse-primary");
+		}
+	}
+
+	& > span:not(.mtu-icon) {
+		height: 40px;
+		display: inline-flex;
+		align-items: center;
+		align-self: flex-start;
+	}
+
+	& > .mtu-icon {
+		width: utils.rem(24px);
+		height: utils.rem(24px);
+		font-size: utils.rem(24px);
+		padding: 0 12px 0 4px;
+	}
+}
+
+.mtu-snackbar-long-action > button {
+	margin-top: 40px;
+}
